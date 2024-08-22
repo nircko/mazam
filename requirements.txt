@@ -1,0 +1,10 @@
+numpy
+matplotlib
+scipy
+scikit-learn
+pydub
+simpleaudio
+sounddevice
+pygame
+torch
+torchvision
