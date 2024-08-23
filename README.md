@@ -30,6 +30,7 @@ Before running the scripts, make sure you have the following installed:
 
 
 ## Organize you dataset
+```bash
 dataset/
   ├── artist_1/
   │   ├── song1_spectrogram.png
@@ -38,3 +39,4 @@ dataset/
   │   ├── song1_spectrogram.png
   │   ├── song2_spectrogram.png
   
+```bash
