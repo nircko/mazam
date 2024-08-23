@@ -4,7 +4,7 @@ import sys
 from pydub import AudioSegment
 
 
-def random_audio_sampler(input_folder, output_file):
+def random_audio_sampler(input_folder, output_folder=None):
     # Get all mp3 files in the input folder
     mp3_files = [f for f in os.listdir(input_folder) if f.endswith('.mp3')]
 
@@ -34,10 +34,14 @@ def random_audio_sampler(input_folder, output_file):
 
     # Extract the 29-second segment
     sampled_audio = audio[start_time:start_time + sample_duration]
-
-    # Save the sampled segment as a new MP3 file
-    sampled_audio.export(output_file, format="mp3")
-    print(f"Sampled audio saved to {output_file}")
+    if output_folder is not None:
+        output_file=os.path.join(output_folder,selected_file + f'{start_time}_{sample_duration}sec.wav')
+        # Save the sampled segment as a new MP3 file
+        sampled_audio.export(output_file, format="wav")
+        print(f"Sampled audio saved to {output_file}")
+        return sampled_audio,output_file
+    else:
+        return sampled_audio
 
 
 if __name__ == "__main__":

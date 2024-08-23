@@ -27,3 +27,41 @@ def plot_spectrogram(audio_file, output_file):
     # Save the plot
     plt.savefig(output_file)
     plt.close()
+
+
+def plot_clean_spectrogram(audio_file, save_path=None):
+    """
+    Plots a spectrogram without axes or whitespace.
+    """
+    # Read the audio file
+    sample_rate, audio_data = wav.read(audio_file)
+
+    # Generate the spectrogram
+    times, frequencies, Sxx = spectrogram(audio_data, sample_rate)
+
+    # Create a figure and axis with no frame
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Plot the spectrogram
+    ax.pcolormesh(times, frequencies, 10 * np.log10(Sxx), shading='gouraud')
+
+    # Remove the axes, ticks, and labels
+    ax.axis('off')
+
+    # Remove whitespace around the plot
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+
+    if save_path:
+        # Save the figure without any whitespace
+        plt.savefig(save_path, bbox_inches='tight', pad_inches=0)
+        plt.close(fig)
+    else:
+        # Display the figure without any whitespace
+        plt.show()
+
+# Example usage:
+# To display the plot:
+# plot_clean_spectrogram(times, frequencies, Sxx)
+
+# To save the plot:
+# plot_clean_spectrogram(times, frequencies, Sxx, save_path="spectrogram.png")
